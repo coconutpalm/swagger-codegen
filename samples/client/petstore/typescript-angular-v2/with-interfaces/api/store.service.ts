@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
@@ -59,11 +58,6 @@ export class StoreService implements StoreServiceInterface {
         return false;
     }
 
-
-    public isJsonMime(mime: string): boolean {
-        const jsonMime: RegExp = new RegExp('^(application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(;.*)?$', 'i');
-        return mime != null && (jsonMime.test(mime) || mime.toLowerCase() === 'application/json-patch+json');
-    }
 
     /**
      * For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors

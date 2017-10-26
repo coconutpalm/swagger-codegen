@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
@@ -22,7 +21,7 @@ import { Order } from '../model/order';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
-import { CustomQueryEncoderHelper }                          from '../encoder';
+import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 
 @Injectable()
@@ -57,6 +56,7 @@ export class StoreService {
     }
 
 
+
     /**
      * Delete purchase order by ID
      * For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
@@ -69,10 +69,12 @@ export class StoreService {
 
         let headers = this.defaultHeaders;
 
-        return this.httpClient.delete<any>(`${this.basePath}/store/order/${encodeURIComponent(orderId)}`, {
-            headers: headers,
-            withCredentials: this.configuration.withCredentials,
-        });
+        return this.httpClient.delete<any>(`${this.basePath}/store/order/${encodeURIComponent(String(orderId))}`,
+            {
+                headers: headers,
+                withCredentials: this.configuration.withCredentials,
+            }
+        );
     }
 
     /**
@@ -88,10 +90,12 @@ export class StoreService {
             headers = headers.set('api_key', this.configuration.apiKeys["api_key"]);
         }
 
-        return this.httpClient.get<any>(`${this.basePath}/store/inventory`, {
-            headers: headers,
-            withCredentials: this.configuration.withCredentials,
-        });
+        return this.httpClient.get<any>(`${this.basePath}/store/inventory`,
+            {
+                headers: headers,
+                withCredentials: this.configuration.withCredentials,
+            }
+        );
     }
 
     /**
@@ -106,10 +110,12 @@ export class StoreService {
 
         let headers = this.defaultHeaders;
 
-        return this.httpClient.get<any>(`${this.basePath}/store/order/${encodeURIComponent(orderId)}`, {
-            headers: headers,
-            withCredentials: this.configuration.withCredentials,
-        });
+        return this.httpClient.get<any>(`${this.basePath}/store/order/${encodeURIComponent(String(orderId))}`,
+            {
+                headers: headers,
+                withCredentials: this.configuration.withCredentials,
+            }
+        );
     }
 
     /**
@@ -124,10 +130,13 @@ export class StoreService {
 
         let headers = this.defaultHeaders;
 
-        return this.httpClient.post<any>(`${this.basePath}/store/order`, body, {
-            headers: headers,
-            withCredentials: this.configuration.withCredentials,
-        });
+        return this.httpClient.post<any>(`${this.basePath}/store/order`,
+            body, 
+            {
+                headers: headers,
+                withCredentials: this.configuration.withCredentials,
+            }
+        );
     }
 
 }

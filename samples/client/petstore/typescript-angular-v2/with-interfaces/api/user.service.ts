@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 /* tslint:disable:no-unused-variable member-ordering */
 
 import { Inject, Injectable, Optional }                      from '@angular/core';
@@ -59,11 +58,6 @@ export class UserService implements UserServiceInterface {
         return false;
     }
 
-
-    public isJsonMime(mime: string): boolean {
-        const jsonMime: RegExp = new RegExp('^(application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(;.*)?$', 'i');
-        return mime != null && (jsonMime.test(mime) || mime.toLowerCase() === 'application/json-patch+json');
-    }
 
     /**
      * This can only be done by the logged in user.
@@ -343,7 +337,7 @@ export class UserService implements UserServiceInterface {
             throw new Error('Required parameter password was null or undefined when calling loginUser.');
         }
 
-        let queryParameters = new URLSearchParams();
+        let queryParameters = new URLSearchParams('', new CustomQueryEncoderHelper());
         if (username !== undefined) {
             queryParameters.set('username', <any>username);
         }
